@@ -4,7 +4,7 @@ var font;
 var points;
 vehicles=[];
 var count =0;
-var texts =["B'day","Nidhisha"];
+var texts =["B'day","Anyone"];
 
 function preload() {
   font = loadFont('AvenirNextLTPro-Demi.otf');
