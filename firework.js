@@ -36,7 +36,7 @@ class Firework {
     };
     this.explode = function () {
       for (var a = 0; a < TWO_PI; a += 0.1) {
-        const r = 30;
+        const r = 10;
         const x = r * 16 * pow(sin(a), 3);
         const y =
           -r * (13 * cos(a) - 5 * cos(2 * a) - 2 * cos(3 * a) - cos(4 * a));

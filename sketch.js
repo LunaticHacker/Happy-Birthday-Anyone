@@ -1,61 +1,47 @@
-var fireworks = [];
-var gravity;
-var font;
-var texts = ["Happy", "B'day", "Anyone"];
+let angle = 0;
+let img;
+let graphics;
+let fireworks = [];
+let gravity;
+let searchParams = new URLSearchParams(window.location.search);
+let param = "Anyone";
+if (searchParams.has("name")) param = searchParams.get("name");
+let capture;
 
 function setup() {
-  createCanvas(window.innerWidth, window.innerHeight);
-  colorMode(HSB);
+  createCanvas(window.innerWidth, window.innerHeight, WEBGL);
+  capture = createCapture(VIDEO);
+  capture.hide();
   gravity = createVector(0, 0.2);
-  stroke(255);
-  strokeWeight(4);
-  background(0);
-  fireworks.push(new Firework());
-}
-
-function preload() {
-  font = loadFont("AvenirNextLTPro-Demi.otf");
+  graphics = createGraphics(width, height);
+  graphics.background(0);
+  graphics.fill(255);
+  graphics.textSize(30);
+  graphics.textAlign(CENTER);
+  graphics.translate(width / 2, height / 2);
 }
 
 function draw() {
-  translate(width / 2, height / 2);
-  colorMode(RGB);
-  background(0, 0, 0, 25);
-
+  background(200);
+  graphics.background(0);
+  graphics.text(`Happy Birthday ${param}`, 0, -200);
   if (random(1) < 0.01) {
     fireworks.push(new Firework());
   }
-
   for (var i = fireworks.length - 1; i >= 0; i--) {
     fireworks[i].update();
     fireworks[i].show();
-
-    if (fireworks[i].done() && i == 0) {
-      if (texts.length > 0) {
-        if (texts[0].length <= 5) {
-          points = font.textToPoints(
-            texts[0],
-            -300 + (5 % texts[0].length) * 100,
-            0,
-            192,
-            {
-              sampleFactor: 0.25,
-            }
-          );
-        } else {
-          points = font.textToPoints(texts[0], -300, 0, 192, {
-            sampleFactor: 0.25,
-          });
-        }
-        for (p of points) {
-          fireworks[i].particles.push(
-            new Particle(0, 0, 255, false, createVector(p.x, p.y))
-          );
-        }
-        texts.shift();
-      } else {
-        fireworks.splice(i, 1);
-      }
+    if (fireworks[i].done()) {
+      fireworks.splice(i, 1);
     }
   }
+
+  push();
+  rotateX(frameCount * 0.01);
+  rotateY(frameCount * 0.01);
+  texture(capture);
+  box(80);
+  pop();
+  texture(graphics);
+  plane(width, height);
 }

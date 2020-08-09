@@ -2,3 +2,5 @@
 p5.js sketch to wish happy b'day inspired from Dan shiffman /Coding Train
 
 [Demo](https://lunatichacker.github.io/Happy-Birthday-Anyone/)
+
+Use url parameter 'name' to change name dynamically.

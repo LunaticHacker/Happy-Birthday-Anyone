@@ -36,13 +36,13 @@ class Particle {
     this.show = function () {
       colorMode(HSB);
       if (!this.firework) {
-        strokeWeight(2);
-        stroke(hu, 255, 255, this.lifespan);
+        graphics.strokeWeight(2);
+        graphics.stroke(hu, 255, 255, this.lifespan);
       } else {
-        strokeWeight(4);
-        stroke(hu, 255, 255);
+        graphics.strokeWeight(4);
+        graphics.stroke(hu, 255, 255);
       }
-      ellipse(this.pos.x, this.pos.y, 10);
+      graphics.ellipse(this.pos.x, this.pos.y, 10);
     };
 
     this.behaviors = function () {
